@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>各縣市食品檢驗不合格數</title>
+		<script src="http://d3js.org/d3.v3.js"  charset="utf-8"></script>
+		<style>
+			/* tell the SVG path to be a thin blue line without any area fill */
+			path {
+				stroke: steelblue;
+				stroke-width: 1;
+				fill: none;
+			}
+			
+			.axis {
+			  shape-rendering: crispEdges;
+			}
+
+			.x.axis line {
+			  stroke: lightgrey;
+			}
+
+			.x.axis .minor {
+			  stroke-opacity: .5;
+			}
+
+			.x.axis path {
+			  display: none;
+			}
+
+			.y.axis line, .y.axis path {
+			  fill: none;
+			  stroke: #000;
+			}
+		</style>
+	</head>
+	<body>
+
+	各縣市食品檢驗不合格數
+
+	<ul class="filters">
+		<li>
+		  <label>
+			<input type="checkbox" id=0 onclick="change(0)">
+			<span class="icon"><i class="fa fa-check"></i></span>
+			<font color="#000000">
+			新北市
+			</font>
+		  </label>
+		</li>
+
+		<li>
+		  <label>
+			<input type="checkbox" id=1 onclick="change(1)">
+			<span class="icon"><i class="fa fa-check"></i></span>
+			<font color="#0000FF">
+			台北市
+			</font>
+		  </label>
+		</li>
+				
+		<li>
+		  <label>
+			<input type="checkbox" id=2 onclick="change(2)">
+			<span class="icon"><i class="fa fa-check"></i></span>
+			<font color="#8A2BE2">
+			桃園市
+			</font>
+		  </label>
+		</li>
+				
+		<li>
+		  <label>
+			<input type="checkbox" id=3 onclick="change(3)">
+			<span class="icon"><i class="fa fa-check"></i></span>
+			<font color="#A52A2A">
+			台中市
+			</font>
+		  </label>
+		</li>
+				
+		<li>
+		  <label>
+			<input type="checkbox" id=4 onclick="change(4)">
+			<span class="icon"><i class="fa fa-check"></i></span>
+			<font color="#DEB887">
+			台南市
+			</font>
+		  </label>
+		</li>
+				
+		<li>
+		  <label>
+			<input type="checkbox" id=5 onclick="change(5)">
+			<span class="icon"><i class="fa fa-check"></i></span>
+			<font color="#5F9EA0">
+			高雄市
+			</font>
+		  </label>
+		</li>
+				
+		<li>
+		  <label>
+			<input type="checkbox" id=6 onclick="change(6)">
+			<span class="icon"><i class="fa fa-check"></i></span>
+			<font color="#7FFF00">
+			宜蘭縣
+			</font>
+		  </label>
+		</li>
+				
+		<li>
+		  <label>
+			<input type="checkbox" id=7 onclick="change(7)">
+			<span class="icon"><i class="fa fa-check"></i></span>
+			<font color="#D2691E">
+			新竹縣
+			</font>
+		  </label>
+		</li>
+				
+		<li>
+		  <label>
+			<input type="checkbox" id=8 onclick="change(8)">
+			<span class="icon"><i class="fa fa-check"></i></span>
+			<font color="#FF7F50">
+			苗栗縣
+			</font>
+		  </label>
+		</li>
+				
+		<li>
+		  <label>
+			<input type="checkbox" id=9 onclick="change(9)">
+			<span class="icon"><i class="fa fa-check"></i></span>
+			<font color="#6495ED">
+			彰化縣
+			</font>
+		  </label>
+		</li>
+				
+		<li>
+		  <label>
+			<input type="checkbox" id=10 onclick="change(10)">
+			<span class="icon"><i class="fa fa-check"></i></span>
+			<font color="#00FFFF">
+			南投縣
+			</font>
+		  </label>
+		</li>
+				
+		<li>
+		  <label>
+			<input type="checkbox" id=11 onclick="change(11)">
+			<span class="icon"><i class="fa fa-check"></i></span>
+			<font color="#DC143C">
+			雲林縣
+			</font>
+		  </label>
+		</li>
+
+		<li>
+		  <label>
+			<input type="checkbox" id=12 onclick="change(12)">
+			<span class="icon"><i class="fa fa-check"></i></span>
+			<font color="#A9A9A9">
+			嘉義縣
+			</font>
+		  </label>
+		</li>
+
+		<li>
+		  <label>
+			<input type="checkbox" id=13 onclick="change(13)">
+			<span class="icon"><i class="fa fa-check"></i></span>
+			<font color="#006400">
+			屏東縣
+			</font>
+		  </label>
+		</li>
+
+		<li>
+		  <label>
+			<input type="checkbox" id=14 onclick="change(14)">
+			<span class="icon"><i class="fa fa-check"></i></span>
+			<font color="#FF8C00">
+			台東縣
+			</font>
+		  </label>
+		</li>
+				
+		<li>
+		  <label>
+			<input type="checkbox" id=15 onclick="change(15)">
+			<span class="icon"><i class="fa fa-check"></i></span>
+			<font color="#FF00FF">
+			花蓮縣
+			</font>
+		  </label>
+		</li>
+				
+		<li>
+		  <label>
+			<input type="checkbox" id=16 onclick="change(16)">
+			<span class="icon"><i class="fa fa-check"></i></span>
+			<font color="#FFFF00">
+			澎湖縣
+			</font>
+		  </label>
+		</li>
+				
+		<li>
+		  <label>
+			<input type="checkbox" id=17 onclick="change(17)">
+			<span class="icon"><i class="fa fa-check"></i></span>
+			<font color="#708090">
+			基隆市
+			</font>
+		  </label>
+		</li>
+				
+		<li>
+		  <label>
+			<input type="checkbox" id=18 onclick="change(18)">
+			<span class="icon"><i class="fa fa-check"></i></span>
+			<font color="#FF0000">
+			新竹市
+			</font>
+		  </label>
+		</li>
+				
+		<li>
+		  <label>
+			<input type="checkbox" id=19 onclick="change(19)">
+			<span class="icon"><i class="fa fa-check"></i></span>
+			<font color="#00FF00">
+			嘉義市
+			</font>
+		  </label>
+		</li>
+				
+		<li>
+		  <label>
+			<input type="checkbox" id=20 onclick="change(20)">
+			<span class="icon"><i class="fa fa-check"></i></span>
+			<font color="#4B0082">
+			金門縣
+			</font>
+		  </label>
+		</li>
+				
+		<li>
+		  <label>
+			<input type="checkbox" id=21 onclick="change(21)">
+			<span class="icon"><i class="fa fa-check"></i></span>
+			<font color="#800000">
+			連江縣
+			</font>
+		  </label>
+		</li>
+  </ul>
+
+	<div id="graph" class="aGraph" style="position:absolute;top:0px;left:150px; float:left;"></div>
+
+
+	<script>
+		var arr=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+		var color=["#000000","#0000FF","#8A2BE2","#A52A2A","#DEB887","#5F9EA0","#7FFF00","#D2691E","#FF7F50","#6495ED","#00FFFF","#DC143C","#A9A9A9","#006400","#FF8C00","#FF00FF","#FFFF00","#708090","#FF0000","#00FF00","#4B0082","#800000"];
+		
+
+		var data=[
+[372,234,179,106,235,170,1180,1251,754,2000,1679,214,58,1207,263],
+[615,571,672,476,486,320,1218,1082,1086,1067,1139,1180,1013,765,638],
+[90,150,89,224,306,217,803,1386,1311,1365,1205,297,359,273,476],
+[471,424,448,684,261,342,3795,3633,4405,2941,2279,2098,1068,382,324],
+[396,347,262,618,165,132,1218,989,521,1331,923,826,341,1087,412],
+[250,394,90,106,318,479,1507,2905,3390,2929,3179,2640,2703,1471,1912],
+[127,91,104,321,65,57,449,633,511,587,1010,461,361,445,279],
+[98,82,69,39,18,8,487,312,470,63,104,158,125,153,242],
+[43,92,159,169,132,139,792,721,616,2251,336,246,157,452,106],
+[13,9,18,49,47,111,258,400,314,596,306,488,480,586,571],
+[35,64,79,19,27,29,395,450,432,1031,700,758,336,420,419],
+[14,12,11,19,55,58,828,1196,1042,786,698,169,190,98,356],
+[37,64,79,19,27,29,395,450,432,1031,700,758,336,420,419],
+[175,209,121,126,91,97,123,140,146,88,70,89,43,156,82],
+[0,1,84,43,17,0,263,102,385,333,735,264,144,160,1],
+[30,34,40,38,93,77,112,51,20,1,0,87,54,64,195],
+[22,32,27,34,19,6,129,409,372,313,898,885,513,239,526],
+[99,45,32,112,65,49,364,504,1270,657,231,183,218,179,226],
+[44,90,71,165,113,106,331,280,344,357,408,209,302,286,325],
+[30,43,33,59,35,58,195,430,208,568,698,336,434,483,242],
+[0,0,0,0,34,15,26,8,3,0,1,1,44,18,26],
+[0,0,0,0,34,18,17,23,484,12,14,12,22,32,13]
+			];
+
+var data2=[];
+var temp=[];
+for(var i=0;i<22;i++)
+	data2[i]=[];
+for(var i=0;i<22;i++){
+	for(var j=0;j<15;j++)
+		data2[i][j]={"x":(j+2000),"y":data[i][j]};
+}
+console.log(data2);
+
+		/* implementation heavily influenced by http://bl.ocks.org/1166403 */
+		
+		// define dimensions of graph
+		var m = [80, 80, 80, 80]; // margins
+		var w = 1000 - m[1] - m[3]; // width
+		var h = 400 - m[0] - m[2]; // height
+
+		// X scale will fit all values from data[] within pixels 0-w
+		var x = d3.scale.linear().domain([2000, 2014]).range([0, w]);
+		// Y scale will fit values from 0-10 within pixels h-0 (Note the inverted domain for the y-scale: bigger is up!)
+		var y = d3.scale.linear().domain([0, 4000]).range([h, 0]);
+			// automatically determining max range can work something like this
+			// var y = d3.scale.linear().domain([0, d3.max(data)]).range([h, 0]);
+
+		// create a line function that can convert data[] into x and y points
+		var line = d3.svg.line()
+			// assign the X function to plot our line as we wish
+			.x(function(d) {
+				//console.log(' d '+d+' d.x '+d.x+' x(d.x) '+x(d.x));
+				return x(d.x); 
+			})
+			.y(function(d) { 
+				//console.log(' d '+d.x+' y(d.y) '+y(d.y));
+				return y(d.y); 
+			})
+			.interpolate("linear");
+			
+		
+
+			// Add an SVG element with the desired dimensions and margin.
+			var graph = d3.select("#graph").append("svg")
+			      .attr("width", w + m[1] + m[3])
+			      .attr("height", h + m[0] + m[2])
+			    .append("g")
+			      .attr("transform", "translate(" + m[3] + "," + m[0] + ")")
+				.attr("class","this");
+
+			// create yAxis
+			var xAxis = d3.svg.axis().scale(x).tickSize(-h).tickSubdivide(true);
+			// Add the x-axis.
+			graph.append("g")
+			      .attr("class", "x axis")
+			      .attr("transform", "translate(0," + h + ")")
+			      .call(xAxis);
+
+
+			// create left yAxis
+			var yAxisLeft = d3.svg.axis().scale(y).ticks(4).orient("left");
+			// Add the y-axis to the left
+			graph.append("g")
+			      .attr("class", "y axis")
+			      .attr("transform", "translate(-25,0)")
+			      .call(yAxisLeft);
+
+		function change(id){
+
+			arr[id]=arr[id]^1;
+
+			d3.selectAll("path").remove();
+			
+			console.log(arr);
+
+			for(var i=0;i<22;i++){
+				if(arr[i]==1)
+					d3.selectAll(".this").append("path").attr("d",line(data2[i])).style("stroke",color[i]);
+			}
+		};
+	</script>
+
+
+
+	</body>
+</html>
